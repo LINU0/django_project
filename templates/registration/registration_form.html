@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %} 中興雅房 {% endblock %}
+{% block content %}
+
+
+
+
+<div class="card mb-3">
+  <img src="{% static 'images/b.png' %}" class="card-img" alt="">
+  <div class="card-img-overlay">
+    <h1 class="card-title text-center text-white">註冊帳號</h1>
+  </div>
+  <div class="card-body">
+
+
+<div class="card bg-light">
+  <div class="card-body">
+     <div class="row">
+         <div class="col-md-12">
+			<h3>帳號註冊</h3>
+        </div>
+    </div>
+
+  </div>
+    <div class="card-footer text-muted">
+    	<form action="." method="POST">
+    		{% csrf_token %}
+    		<table>
+    			{{form.as_table}}
+    		</table>
+    		<input type="submit" value="送出">
+    	    <input type="reset" value="清除">
+    	</form>
+    </div>
+
+</div>
+</div>
+</div>
+{% endblock %}

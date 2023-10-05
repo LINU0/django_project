@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block title %}預約資訊{% endblock %}
+{% block content %}
+<div class="row">
+    <table class="table table-striped">
+    <th>姓名</th>
+    <th>電話</th>
+    <th>預約時間</th>
+    <th>留言</th>
+    {% for book in books %}
+    <tr>
+    <td>{{ book.name }}</td>
+    <td>{{ book.phone }}</td>
+    <td>{{ book.time }}</td>
+    <td>{{ book.message }}</td>
+    </tr>
+    {% endfor %}
+    </table>
+</div>
+{% endblock %}

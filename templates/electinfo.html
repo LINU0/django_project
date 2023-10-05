@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} 住戶用電資訊 {% endblock %}
+{% block content %}
+{% for message in messages %}
+    <div class="alert alert-{{message.tags}}">{{ message }}</div>
+{% endfor %}
+<div class="card mb-3">
+  <img src="{% static 'images/b.png' %}" class="card-img" alt="">
+  <div class="card-img-overlay">
+    <h1 class="card-title text-center text-white">電費資訊</h1>
+  </div>
+  <div class="card-body">
+<div class="card" >
+  <div class="card-header">
+    本期電費資訊
+  </div>
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item">起始日期: {{electotal.startdate}}</li>
+    <li class="list-group-item">結算日期: {{electotal.enddate}}</li>
+    <li class="list-group-item">總度數: {{electotal.totaluse}}</li>
+    <li class="list-group-item">總金額: {{electotal.totalbill}}</li>
+    <li class="list-group-item">一度電: {{electotal.per_price}} 元</li>
+  </ul>
+</div>
+
+<div class="row">
+    <table class="table table-striped">
+    <th>房號</th>
+    <th>上期私錶</th>
+    <th>本期私錶</th>
+    <th>私錶使用(度)</th>
+    <th>平均公用電(度)</th>
+    <th>需繳交電費((公+私)*元/度)</th>
+    <th>繳了嗎</th>
+
+
+    <tr>
+    <td>{{ room.roomnumber }}</td>
+    <td>{{ electperson.last_use }}</td>
+    <td>{{ electperson.current_use }}</td>
+    <td>{{ electperson.personaluse }}</td>
+    <td>{{ electperson.avg_totaluse }}</td>
+    <td>{{ electperson.bill }}</td>
+    {% if electperson.pay == False %}
+        <td><span class="badge badge-secondary">尚未繳交</span></td>
+    {% else %}
+        <td><span class="badge badge-success">已繳交</span></td>
+    {% endif %}
+
+    </table>
+</div>
+</div>
+</div>
+{% endblock %}

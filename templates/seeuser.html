@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% block title %} 住戶資訊 {% endblock %}
+{% block content %}
+{% for message in messages %}
+    <div class="alert alert-{{message.tags}}">{{ message }}</div>
+{% endfor %}
+<div class="row">
+    {{ R_type}}
+    <table class="table table-striped">
+    <th>租戶</th>
+    <th>房號</th>
+    <th>電話號碼</th>
+    <th>地址</th>
+    <th>入住時間</th>
+    <th>結束時間</th>
+    <th>緊急聯絡人</th>
+    <th>緊急連絡電話</th>
+    <th>刪除租戶</th>
+    {% for resident in resident %}
+    <tr>
+    <td>{{ resident.name.username }}</td>
+    <td>{{ resident.roomnumber.roomnumber }}</td>
+    <td>{{ resident.phone_number }}</td>
+    <td>{{ resident.address }}</td>
+    <td>{{ resident.date_start }}</td>
+    <td>{{ resident.date_end }}</td>
+    <td>{{ resident.emergencycontact }}</td>
+    <td>{{ resident.emergencynumber }}</td>
+    <td><i class="bi bi-trash" onclick="go_delete({{resident.id}})"></i></td>
+    </tr>
+    {% endfor %}
+    </table>
+</div>
+<script>
+    function go_delete(id){
+        var usr = '/seeuser/' + id;
+        window.location = usr;
+    }
+</script>
+{% endblock %}

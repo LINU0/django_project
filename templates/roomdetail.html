@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %} 房間詳細 {% endblock %}
+{% block content %}
+<div class="card mb-3">
+  <img src="{% static 'images/b.png' %}" class="card-img" alt="">
+  <div class="card-img-overlay">
+    <h1 class="card-title text-center text-white">房間資訊</h1>
+  </div>
+  <div class="card-body">
+
+
+<div class="card bg-light">
+  <div class="card-header">{{room.roomnumber}}</div>
+
+  <div class="card-body">
+     <div class="row">
+    {% for p in photos %}
+        {% if p.roomnumber == room %}
+            <div class="col-md-3">
+                <div class="card mb-4 shadow-sm">
+                    <img class="card-img-top" src="{{ p.photo.url }}" height="250px" alt="" />
+                </div>
+            </div>
+        {% endif %}
+    {% endfor %}
+    </div>
+  </div>
+  <div class="card-body">
+    <p class="card-text">{{ room.detail }}</p>
+  </div>
+  <div class="card-footer text-muted">
+      {% if room.rent != None %}
+         租金:{{ room.rent }}
+      {% endif %}
+  </div>
+</div>
+
+</div>
+</div>
+
+
+{% endblock %}

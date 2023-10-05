@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% block title %}登入{% endblock %}
+{% block content %}
+
+<div class="container">
+	{% for message in messages %}
+	<div class="alert alert-{{message.tags	}}">{{message}}</div>
+	{% endfor%}
+
+	<form action="." method="POST">
+	    {% csrf_token %}
+		<div class="form-group">
+    <label for="startdate">起始日</label>
+    <input type="date" class="form-control" id="startdate" name="startdate">
+     </div>
+     <div class="form-group">
+    <label for="enddate">結算日</label>
+    <input type="date" class="form-control" id="enddate" name="enddate">
+     </div>
+
+     <div class="form-group">
+    <label for="totaluse">本期總度數</label>
+    <input type="number" class="form-control" id="totaluse" name="totaluse">
+  </div>
+
+  <div class="form-group">
+    <label for="totalbill">本期總金額</label>
+    <input type="number" class="form-control" id="totalbill" name="totalbill">
+  </div>
+
+
+  <div class="form-group">
+    <label for="r301">301私錶度數</label>
+    <input type="number" step="0.1" class="form-control" id="r301" name="r301">
+  </div>
+  <div class="form-group">
+    <label for="r302">302私錶度數</label>
+    <input type="number" step="0.1" class="form-control" id="r302" name="r302">
+  </div>
+  <div class="form-group">
+    <label for="r303">303私錶度數</label>
+    <input type="number" step="0.1" class="form-control" id="r303" name="r303">
+  </div>
+  <div class="form-group">
+    <label for="r305">305私錶度數</label>
+    <input type="number" step="0.1" class="form-control" id="r305" name="r305">
+  </div>
+  <button type="submit" class="btn btn-primary">發布</button>
+  <p>發布後重設房客繳交狀態</p>
+	</form>
+
+</div>
+{% endblock %}

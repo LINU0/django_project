@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %} 中興雅房 {% endblock %}
+{% block content %}
+<div class="container">
+{% for message in messages %}
+    <div class="alert alert-{{message.tags}}">{{ message }}</div>
+{% endfor %}
+</div>
+
+<div class="card mb-3">
+  <img src="{% static 'images/b.png' %}" class="card-img" alt="">
+  <div class="card-img-overlay">
+    <h1 class="card-title text-center text-white">房間資訊</h1>
+  </div>
+  <div class="card-body">
+
+<div class="card-group">
+    {% for r,e in room_info %}
+    <div class="card">
+        {% for p in photos %}
+            {% if p.roomnumber == r %}
+                <img class="card-img-top" src="{{ p.photo.url }}" height = "250pt" alt="" />
+                {{ "<!--" }}
+            {% endif %}
+        {% endfor %}
+        {{"-->"}}
+    <div class="card-body">
+      <h2 class="card-title">{{r.roomnumber}}</h2>
+      <p class="card-text">{{r.detail | truncatechars:20 }}</p>
+      <a href = "{% url 'roomdetail-url' r.roomnumber %}">查看更多</a>
+    </div>
+    <div class="card-footer">
+        {% if r.rent != None %}
+        <small class="text-muted">租金:{{r.rent}}</small>
+        <span class="badge badge-secondary">{{ e }}</span>
+        {% endif %}
+    </div>
+    </div>
+
+    {% endfor %}
+</div>
+
+</div>
+</div>
+
+<div class="card mb-3">
+  <img src="{% static 'images/233.png' %}" class="card-img" alt="">
+  <div class="card-img-overlay">
+    <h1 class="card-title text-center text-white">位置資訊</h1>
+  </div>
+    <div class="card-body">
+        <iframe src="https://maps.google.com.tw/maps?f=q&hl=zh-TW&q=24.12197737751813,120.68042699607508&z=16&t=q&output=embed" height="500" width="100%" ></iframe>
+    </div>
+    </div>
+
+{% endblock %}

@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %} 個人資訊 {% endblock %}
+{% block content %}
+<div class="card mb-3">
+  <img src="{% static 'images/b.png' %}" class="card-img" alt="">
+  <div class="card-img-overlay">
+    <h1 class="card-title text-center text-white">使用者資訊</h1>
+  </div>
+  <div class="card-body">
+
+
+<div class="card bg-light">
+  <div class="card-header">{{user.username}}</div>
+
+  <div class="card-body">
+     <div class="row">
+         <div class="col-md-12">
+            房號:{{ resident_profile.roomnumber.roomnumber}}<br>
+            連絡電話:{{resident_profile.phone_number}}<br>
+        	戶籍地址:{{ resident_profile.address }}<br>
+        	緊急聯絡人:{{ resident_profile.emergencycontact }}<br>
+        	緊急電話:{{ resident_profile.emergencynumber }}<br>
+        </div>
+    </div>
+
+  </div>
+    <div class="card-footer text-muted">
+          <form name="myname" action="." method="POST">
+        	{% csrf_token %}
+        	<table>
+        		{{ profile_form.as_table }}
+        	</table>
+        	<input type="submit" value="修改個人資料">
+        </form>
+    </div>
+</div>
+
+</div>
+</div>
+
+{% endblock %}

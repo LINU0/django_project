@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% block title %} 住戶用電資訊 {% endblock %}
+{% block content %}
+{% for message in messages %}
+    <div class="alert alert-{{message.tags}}">{{ message }}</div>
+{% endfor %}
+
+<div class="card" >
+  <div class="card-header">
+    本期電費資訊
+  </div>
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item">起始日期: {{electotal.startdate}}</li>
+    <li class="list-group-item">結算日期: {{electotal.enddate}}</li>
+    <li class="list-group-item">總度數: {{electotal.totaluse}}</li>
+    <li class="list-group-item">總金額: {{electotal.totalbill}}</li>
+    <li class="list-group-item">一度電: {{electotal.per_price}} 元</li>
+  </ul>
+</div>
+
+<div class="row">
+    <table class="table table-striped">
+    <th>房號</th>
+    <th>上期私錶</th>
+    <th>本期私錶</th>
+    <th>私錶使用(度)</th>
+    <th>平均公用電(度)</th>
+    <th>需繳交電費((公+私)*元/度)</th>
+    <th>是否繳交</th>
+    {% for e in electperson %}
+    <tr>
+    <td>{{ e.roomnumber.roomnumber }}</td>
+    <td>{{ e.last_use }}</td>
+    <td>{{ e.current_use }}</td>
+    <td>{{ e.personaluse }}</td>
+    <td>{{ e.avg_totaluse }}</td>
+    <td>{{ e.bill }}</td>
+    {% if e.pay == False %}
+        <td><span class="badge badge-secondary">未繳交</span></td>
+        <td><button type="button" class="btn btn-success"onclick="has_paid({{e.roomnumber.roomnumber}})">已繳費</button></td>
+    {% else %}
+        <td><span class="badge badge-success">已繳交</span></td>
+    {% endif %}
+    {% endfor %}
+    </table>
+</div>
+<script>
+    function has_paid(id){
+        var r = '/adminelectric/' + id;
+        window.location = r;
+    }
+</script>
+{% endblock %}
